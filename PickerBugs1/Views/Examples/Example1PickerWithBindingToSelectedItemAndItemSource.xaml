@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:PickerBugs1.Models;assembly=PickerBugs1"
+             mc:Ignorable="d"
+             x:Class="PickerBugs1.Views.Examples.Example1PickerWithBindingToSelectedItemAndItemSource">
+    <ContentPage.Resources>
+        <Array x:Key="AllColorsArray" Type="{x:Type models:DummyColor}">
+            <models:DummyColor Name="Red"></models:DummyColor>
+            <models:DummyColor Name="Blue"></models:DummyColor>
+            <models:DummyColor Name="Green"></models:DummyColor>
+            <models:DummyColor Name="Yellow"></models:DummyColor>
+        </Array>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <Label LineBreakMode="WordWrap">Set both pickers to some (different) color. Then click on the button</Label>
+            <Picker ItemDisplayBinding="{Binding Name}" 
+                    SelectedItem="{Binding ChosenColor}"
+                    ItemsSource="{Binding AllColors}">
+            </Picker>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Text="(ItemsSource={Binding ...})) ChosenColor="></Label>
+                <Label Grid.Column="1" Text="{Binding ChosenColor.Name}"></Label>
+            </Grid>
+
+            <Picker ItemDisplayBinding="{Binding Name}" 
+                    SelectedItem="{Binding ChosenColor2}"
+                    ItemsSource ="{StaticResource AllColorsArray}"
+                    >
+            </Picker>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Text="(ItemsSource={StaticResource ...}) ChosenColor2="></Label>
+                <Label Grid.Column="1" Text="{Binding ChosenColor2.Name}"></Label>
+            </Grid>
+            <Button x:Name="ActionButton" Text="Clear BindingContext" Clicked="ActionButton_OnClicked"></Button>
+            <Label LineBreakMode="WordWrap">Conclusion: if using binding with Itemsource 'ChosenColor' is set to null</Label>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

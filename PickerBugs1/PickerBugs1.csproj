@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Controls\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Examples\Example1PickerWithBindingToSelectedItemAndItemSource.xaml.cs">
+      <DependentUpon>Example1PickerWithBindingToSelectedItemAndItemSource.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Examples\Example3PickerAttributeOrderMatters.xaml.cs">
+      <DependentUpon>Example3PickerAttributeOrderMatters.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Examples\Example2PickerInCollectionViewWithBindingToSelectedItemAndItemsSource.xaml.cs">
+      <DependentUpon>Example2PickerInCollectionViewWithBindingToSelectedItemAndItemsSource.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Examples\VerticalListPage.xaml.cs">
+      <DependentUpon>VerticalListPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\ScrollTo\ScrollToByIndexPage.xaml.cs">
+      <DependentUpon>ScrollToByIndexPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\ScrollTo\ScrollToByObjectPage.xaml.cs">
+      <DependentUpon>ScrollToByObjectPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Views\Examples\Example2PickerInCollectionViewWithBindingToSelectedItemAndItemsSource.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Examples\Example1PickerWithBindingToSelectedItemAndItemSource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Examples\Example2PickerInCollectionViewWithBindingToSelectedItemAndItemsSource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Examples\Example3PickerAttributeOrderMatters.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Examples\VerticalListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+</Project>

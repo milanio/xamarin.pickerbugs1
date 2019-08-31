@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:PickerBugs1.Models;assembly=PickerBugs1"
+             mc:Ignorable="d"
+             x:Name="Example3PickerAttributeOrderMattersContentPage"
+             x:Class="PickerBugs1.Views.Examples.Example3PickerAttributeOrderMatters">
+    
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="CenterAndExpand">
+            <Label LineBreakMode="WordWrap">Set all 4 pickers to some (different) color. Then click on the button</Label>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Text="ChosenColorA"></Label>
+                <Picker Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                        ItemDisplayBinding="{Binding Name}" 
+                        SelectedItem="{Binding ChosenColorA}"
+                        ItemsSource="{Binding AllColors}">
+                </Picker>
+            </Grid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Text="ChosenColorB"></Label>
+                <Picker Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                        ItemDisplayBinding="{Binding Name}" 
+                        ItemsSource="{Binding AllColors}"
+                        SelectedItem="{Binding ChosenColorB}">
+                </Picker>
+            </Grid>
+
+
+            <Button x:Name="ActionButton" Text="Clear BindingContext" Clicked="ActionButton_OnClicked"></Button>
+
+            <Frame BorderColor="Black">
+                <StackLayout BindingContext="{Binding MonkeysVM,Source={x:Reference Name=Example3PickerAttributeOrderMattersContentPage}}">
+                    <Label>Properties on MonkeysVM</Label>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="ChosenColorA="></Label>
+                        <Label TextColor="Red" FontAttributes="Bold" Grid.Column="1" Text="{Binding ChosenColorA.Name}"></Label>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="ChosenColorB="></Label>
+                        <Label TextColor="Red" FontAttributes="Bold" Grid.Column="1" Text="{Binding ChosenColorB.Name}"></Label>
+                    </Grid>
+                    
+                </StackLayout>
+            </Frame>
+
+            <Label LineBreakMode="WordWrap">Conclusion: 'ChosenColorA' is set to null immediately when changing context to null. 'ChosenControlB' will be set to null when changing context back</Label>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:PickerBugs1.Controls;assembly=PickerBugs1"
+             x:Class="PickerBugs1.Views.Examples.VerticalListPage"
+             Title="CollectionView - Swap 2 Binding Contexts">
+    <StackLayout Margin="20">
+        <Picker Grid.Row="2"
+                Grid.Column="0" 
+                Grid.ColumnSpan="2"
+                ItemDisplayBinding="{Binding Name}" 
+                SelectedItem="{Binding SelectedColorX}"
+        ></Picker>
+        <Button Text="Change Binding Context To Null and Back" Clicked="ActionButton_OnClicked"></Button>
+        <CollectionView ItemsSource="{Binding Monkeys}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.RowSpan="2" 
+                               Source="{Binding ImageUrl}" 
+                               Aspect="AspectFill"
+                               HeightRequest="60" 
+                               WidthRequest="60" />
+                        <Label Grid.Column="1" 
+                               Text="{Binding Name}" 
+                               FontAttributes="Bold" />
+                        <Label Grid.Row="1"
+                               Grid.Column="1" 
+                               Text="{Binding Location}"
+                               FontAttributes="Italic" 
+                               VerticalOptions="End" />
+                        <Picker Grid.Row="2"
+                                Grid.Column="0" 
+                                Grid.ColumnSpan="2"
+                                ItemDisplayBinding="{Binding Name}" 
+                                SelectedItem="{Binding SelectedColor}" 
+                                
+                                 ></Picker>
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

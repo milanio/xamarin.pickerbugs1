@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:examples="clr-namespace:PickerBugs1.Views.Examples;assembly=PickerBugs1"
+             x:Class="PickerBugs1.Views.MainPage"
+             Title="Picker Bugs1">
+    <ContentPage.Resources>
+        <Style x:Key="FrameStyle1" TargetType="Frame" >
+            <Setter Property="BorderColor" Value="Blue"></Setter>
+            <Setter Property="Padding" Value="10"></Setter>
+        </Style>
+    </ContentPage.Resources>
+    <StackLayout>
+        <Label Text="Problem 1: Picker will set property bound to SelectedItem to null on ContextChange"></Label>
+        <Label Text="Problem 2: Order of attributes SelectedItem and ItemsSource in XAML matters "></Label>
+
+        <Frame Style="{StaticResource FrameStyle1}">
+            <StackLayout Padding="10">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="{x:Type examples:Example1PickerWithBindingToSelectedItemAndItemSource}"></TapGestureRecognizer>
+                </StackLayout.GestureRecognizers>
+                <Label FontSize="Medium"  LineBreakMode="WordWrap">Example 1: Picker in ContentPage </Label>
+                <Label LineBreakMode="WordWrap">Problem: Picker will set property 'ChosenColor' to null when changing BindingContext to null and back</Label>
+            </StackLayout>
+        </Frame>
+        <Frame Style="{StaticResource FrameStyle1}">
+            <StackLayout Padding="10" >
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="{x:Type examples:Example2PickerInCollectionViewWithBindingToSelectedItemAndItemsSource}"></TapGestureRecognizer>
+                </StackLayout.GestureRecognizers>
+                <Label FontSize="Medium"  LineBreakMode="WordWrap">Example 2: Picker in CollectionView </Label>
+                <Label  LineBreakMode="WordWrap">Problem: Picker will set both bound properties 'SelectedColor' &amp; 'SelectedColor2' to null when changing BindingContext to null and back</Label>
+            </StackLayout>
+        </Frame>
+
+        <Frame Style="{StaticResource FrameStyle1}">
+            <StackLayout Padding="10" >
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="{x:Type examples:Example3PickerAttributeOrderMatters}"></TapGestureRecognizer>
+                </StackLayout.GestureRecognizers>
+                <Label FontSize="Medium"  LineBreakMode="WordWrap">Example 3: Picker Attribute order</Label>
+                <Label  LineBreakMode="WordWrap">Problem: Picker ItemsSource and SelectedItem attribute order matters - Property bound to SelectedItem will be set to null on detaching or reattaching of BindingContext!</Label>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+
+</ContentPage>

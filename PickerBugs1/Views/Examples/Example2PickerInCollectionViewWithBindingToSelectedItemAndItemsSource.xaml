@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:PickerBugs1.Models;assembly=PickerBugs1"
+             mc:Ignorable="d"
+             x:Class="PickerBugs1.Views.Examples.Example2PickerInCollectionViewWithBindingToSelectedItemAndItemsSource">
+    <ContentPage.Resources>
+        <Array x:Key="AllColorsArray" Type="{x:Type models:DummyColor}">
+            <models:DummyColor Name="Red"></models:DummyColor>
+            <models:DummyColor Name="Blue"></models:DummyColor>
+            <models:DummyColor Name="Green"></models:DummyColor>
+            <models:DummyColor Name="Yellow"></models:DummyColor>
+        </Array>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="CenterAndExpand">
+            <Label LineBreakMode="WordWrap">Set both pickers to some (different) color. Then click on the button</Label>
+
+            <Button x:Name="ActionButton" Text="Clear BindingContext" Clicked="ActionButton_OnClicked"></Button>
+
+            <CollectionView ItemsSource="{Binding Monkeys}" HorizontalOptions="CenterAndExpand" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate >
+                        <Frame Padding="1" BorderColor="Blue">
+                        <Grid Padding="10" HorizontalOptions="CenterAndExpand">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.RowSpan="2" 
+                               Source="{Binding ImageUrl}" 
+                               Aspect="AspectFill"
+                               HeightRequest="60" 
+                               WidthRequest="60" />
+                            <Label Grid.Column="1" 
+                               Text="{Binding Name}" 
+                               FontAttributes="Bold" />
+                            <Label Grid.Row="1"
+                               Grid.Column="1" 
+                               Text="{Binding Location}"
+                               FontAttributes="Italic" 
+                               VerticalOptions="End" />
+                                    <Label Grid.Row="2"
+                                           Grid.Column="0" 
+                                           Grid.ColumnSpan="2"
+                                           Text="Choose color (ItemsSource is Bound to property on Monkey)"
+                                  />
+
+                            <Picker Grid.Row="3"
+                                    Grid.Column="0" 
+                                    Grid.ColumnSpan="2"
+                                    ItemDisplayBinding="{Binding Name}" 
+                                    SelectedItem="{Binding SelectedColor}" 
+                                    ItemsSource="{Binding AllColors}"
+                                
+                            ></Picker>
+                            <Label Grid.Row="4"
+                                   Grid.Column="0" 
+                                   Grid.ColumnSpan="2"
+                                   Text="Choose color 2 (ItemsSource is StaticResource)"
+ />
+                            <Picker Grid.Row="5"
+                                    Grid.Column="0" 
+                                    Grid.ColumnSpan="2"
+                                    ItemDisplayBinding="{Binding Name}" 
+                                    SelectedItem="{Binding SelectedColor2}" 
+                                    ItemsSource="{StaticResource AllColorsArray}"
+                                
+                            ></Picker>
+
+
+                        </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
